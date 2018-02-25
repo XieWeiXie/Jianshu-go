@@ -3,8 +3,6 @@ package jianshu
 import (
 	"strings"
 
-	"fmt"
-
 	"github.com/PuerkitoBio/goquery"
 )
 
@@ -186,43 +184,144 @@ func (user *User) GetPassageTopics() []*Topics {
 	return allPassageTopics
 }
 
-func (user *User) GetLikedNotes() []PassageDetail {
-	var allLikedPassages []PassageDetail
+func (user *User) GetLikedNotes() []LikeNotes {
+	var allLikedPassages []LikeNotes
 	doc, _ := goquery.NewDocument(LikedNotesUrl(user))
 	likedNumber := doc.Find("ul.trigger-menu li").Eq(1).Find("a").Text()
 	if StringGetInt(likedNumber) == 0 {
 		return nil
 	}
-
+	doc.Find("div.content").Each(func(i int, selection *goquery.Selection) {
+		if i >= 1 {
+			author := selection.Find("div.info a.nickname").Text()
+			tempAuthorUrl, _ := selection.Find("div.info a").Attr("href")
+			authorUrl := MakeCompleteUrl(tempAuthorUrl)
+			title := selection.Find("div.info a.title").Text()
+			abstract := StringSpace(selection.Find("p.abstract").Text())
+			//fmt.Println(author, authorUrl, title, abstract)
+			one := LikeNotes{
+				author:    author,
+				authorUrl: authorUrl,
+				title:     title,
+				abstract:  abstract,
+			}
+			allLikedPassages = append(allLikedPassages, one)
+		}
+	})
 	return allLikedPassages
 }
 
 func (user *User) GetSubscription() []SpecialTopics {
-	var allLikedTopics []SpecialTopics
+	var allSubscription []SpecialTopics
 	doc, _ := goquery.NewDocument(SubscriptionUrl(user))
 	SubscriptionNumber := doc.Find("ul.trigger-menu li").Eq(0).Find("a").Text()
 	if StringGetInt(SubscriptionNumber) == 0 {
 		return nil
 	}
 	doc.Find("div.info").Each(func(i int, selection *goquery.Selection) {
-		//name := selection.Find("a.title").Text()
-		//tempUrl, _ := selection.Find("a").Attr("href")
-		//url := MakeCompleteUrl(tempUrl)
-		creatorPassageAndFollower := selection.Find("div.meta").Text()
-		creator := strings.Replace(creatorPassageAndFollower, "\n", "", -1)
-		fmt.Println(creator)
+		if i >= 1 {
+			name := selection.Find("a").Text()
+			tempUrl, _ := selection.Find("a").Attr("href")
+			url := MakeCompleteUrl(tempUrl)
+			creatorPassageAndFollower := StringSpace(selection.Find("div.meta").Text())
+			creator, PassageAndFollower := StringHandle(creatorPassageAndFollower)
+			passage, follower := StringSplitWith(PassageAndFollower)
+			//fmt.Println(name, url, creator, passage, follower)
+			one := SpecialTopics{
+				name:                name,
+				url:                 url,
+				creator:             creator,
+				totalPassage:        passage,
+				totalFollowerNumber: follower,
+			}
+			allSubscription = append(allSubscription, one)
+		}
+
 	})
-	return allLikedTopics
+	return allSubscription
 }
 
-func (user *User) GetLatestInfo() *LatestComment {
-	return &LatestComment{}
+func (user *User) GetLatestActive() []LatestActive {
+	var allLatestActive []LatestActive
+	doc, _ := goquery.NewDocument(TimeLineUrl(user))
+	doc.Find("ul.note-list li").Each(func(i int, selection *goquery.Selection) {
+		var activeDetail string
+		tempActiveType, _ := selection.Find("span").Attr("data-type")
+		activeType := StringSpace(tempActiveType)
+		if strings.Contains(activeType, "like_comment") {
+			activeDetail = StringSpace(selection.Find("p.comment").Text())
+		}
+		if strings.Contains(activeType, "like_user") {
+			activeDetail = StringSpace(selection.Find("a.title").Text())
+		}
+		if strings.Contains(activeType, "comment_note") {
+			activeDetail = StringSpace(selection.Find("a.title").Text())
+		}
+		if strings.Contains(activeType, "like_note") {
+			activeDetail = StringSpace(selection.Find("a.title").Text())
+		}
+		if strings.Contains(activeType, "share_note") {
+			activeDetail = StringSpace(selection.Find("a.title").Text())
+		}
+		//fmt.Println(activeType, activeDetail)
+		one := LatestActive{
+			activeType:   activeType,
+			activeDetail: activeDetail,
+		}
+		allLatestActive = append(allLatestActive, one)
+	})
+	return allLatestActive
 }
 
-func (user *User) GetLatestContent() *PassageDetail {
-	return &PassageDetail{}
+func (user *User) GetLatestCommented() []LatestCommented {
+	var allLatestCommented []LatestCommented
+	if user.GetWriteNumber() == 0 {
+		return nil
+	}
+	doc, _ := goquery.NewDocument(CommentedUrl(user))
+	doc.Find("ul.note-list li").Each(func(i int, selection *goquery.Selection) {
+		title := selection.Find("a.title").Text()
+		tempUrl, _ := selection.Find("a").Attr("href")
+		url := MakeCompleteUrl(tempUrl)
+		abstract := StringSpace(selection.Find("p.abstract").Text())
+		//fmt.Println(title, url, abstract)
+		one := LatestCommented{
+			title:    title,
+			url:      url,
+			abstract: abstract,
+		}
+		allLatestCommented = append(allLatestCommented, one)
+	})
+	return allLatestCommented
 }
 
-func (user *User) GetHotPassage() *PassageDetail {
-	return &PassageDetail{}
+func (user *User) GetHotPassage() []PassageDetail {
+	var allPassageDetail []PassageDetail
+	if user.GetWriteNumber() == 0 {
+		return nil
+	}
+	doc, _ := goquery.NewDocument(HotPassageUrl(user))
+	doc.Find("ul.note-list li").Each(func(i int, selection *goquery.Selection) {
+		time, _ := selection.Find("div.content").Find("div.author").Find("div.info span").Attr("data-shared-at")
+		title := selection.Find("a.title").Text()
+		abstract := StringSpace(selection.Find("p.abstract").Text())
+		reader := StringToInt(StringSpace(selection.Find("div.meta").Find("a").Eq(0).Text()))
+		comment := StringToInt(StringSpace(selection.Find("div.meta").Find("a").Eq(1).Text()))
+		liked := StringToInt(StringSpace(selection.Find("div.meta").Find("span").Eq(0).Text()))
+		payed := StringToInt(StringSpace(selection.Find("div.meta").Find("span").Eq(1).Text()))
+		author := user.userID
+		//fmt.Println(time, title, abstract, reader, comment, liked, payed, author)
+		one := PassageDetail{
+			time:     time,
+			title:    title,
+			abstract: abstract,
+			reader:   reader,
+			comment:  comment,
+			liked:    liked,
+			payed:    payed,
+			author:   author,
+		}
+		allPassageDetail = append(allPassageDetail, one)
+	})
+	return allPassageDetail
 }

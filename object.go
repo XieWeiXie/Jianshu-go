@@ -23,8 +23,29 @@ type SpecialTopics struct {
 	totalFollowerNumber string `json:"total_follower_number"`
 }
 
-type LatestComment struct {
-	time         string `json:"time""`
-	comment      string `json:"comment"`
-	passageTitle string `json:"passage_title"`
+type LikeNotes struct {
+	author    string `json:"author"`
+	authorUrl string `json:"authorHomePage"`
+	title     string `json:"title"`
+	abstract  string `json:"abstract"`
+}
+
+// 分三类: 评论、喜欢、关注
+type LatestActive struct {
+	activeType   string `json:"type"`
+	activeDetail string `json:"detail"`
+}
+
+// 最新评论的文章
+type LatestCommented struct {
+	title    string `json:"title"`
+	abstract string `json:"abstract"`
+	url      string `json:"url"`
+}
+
+// 首页的热门文集
+type TopicCollection struct {
+	name                  string `json:"name"`
+	collectionDescription string `json:"description"`
+	passageAndFollower    string `json:"detail"`
 }

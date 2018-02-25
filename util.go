@@ -7,8 +7,9 @@ import (
 )
 
 const (
-	rootUrl     = "https://www.jianshu.com/"
-	rootUrlOnce = "https://www.jianshu.com"
+	rootUrl          = "https://www.jianshu.com/"
+	rootUrlOnce      = "https://www.jianshu.com"
+	homePageTopicUrl = "https://www.jianshu.com/recommendations/users?utm_source=desktop&utm_medium=index-users"
 )
 
 func MakeCompleteUrl(element string) string {
@@ -51,6 +52,7 @@ func GetUuidFromLink(user *User) string {
 	return urlList[4]
 }
 
+// 各种URL集合
 func LikedNotesUrl(user *User) string {
 	id := GetUuidFromLink(user)
 	if id == "None" {
@@ -67,17 +69,54 @@ func SubscriptionUrl(user *User) string {
 	return rootUrl + "users/" + id + "/subscriptions?_pjax=%23list-container"
 }
 
+func TimeLineUrl(user *User) string {
+	id := GetUuidFromLink(user)
+	if id == "None" {
+		panic("id should not be nil.")
+	}
+	return rootUrl + "users/" + id + "/timeline?_pjax=%23list-container"
+}
+
+func CommentedUrl(user *User) string {
+	id := GetUuidFromLink(user)
+	if id == "None" {
+		panic("id should not be nil.")
+	}
+	return user.Link + "?order_by=commented_at&_pjax=%23list-container"
+}
+
+func HotPassageUrl(user *User) string {
+	id := GetUuidFromLink(user)
+	if id == "None" {
+		panic("id should not be nil.")
+	}
+	return user.Link + "?order_by=top&_pjax=%23list-container"
+}
+
+// 首页热门推荐专题
+// 废弃
+func HomePageTopicUrl() string {
+	return homePageTopicUrl
+}
+
 func StringGetInt(value string) int {
 	tempInt := strings.SplitAfter(value, " ")
 	return StringToInt(tempInt[1])
 }
 
 func StringHandle(value string) (string, string) {
-	newValue := StringSpace(strings.Replace(value, "\n", "", -1))
-	newValueList := strings.Split(newValue, " ")
-	fmt.Println(newValueList)
+	newStringFirst := StringSpace(strings.Replace(value, " ", "", -1))
+	newList := strings.Split(newStringFirst, "\n")
+	//fmt.Println(newList[0], newList[len(newList)-1])
+	return newList[0], newList[len(newList)-1]
 }
 
-func RegexpNumber(value string) (int, int) {
-
+func StringCommont(value string) string {
+	newStringFirst := strings.Replace(value, "\n", "", -1)
+	newString := strings.Replace(newStringFirst, " ", "", -1)
+	return StringSpace(newString)
+}
+func StringSplitWith(value string) (string, string) {
+	newString := strings.Split(value, "，")
+	return newString[0], newString[len(newString)-1]
 }
