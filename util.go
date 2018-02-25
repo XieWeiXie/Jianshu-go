@@ -10,6 +10,7 @@ const (
 	rootUrl          = "https://www.jianshu.com/"
 	rootUrlOnce      = "https://www.jianshu.com"
 	homePageTopicUrl = "https://www.jianshu.com/recommendations/users?utm_source=desktop&utm_medium=index-users"
+	homePageAuthor   = "https://www.jianshu.com/recommendations/users?utm_source=desktop&utm_medium=index-users"
 )
 
 func MakeCompleteUrl(element string) string {
@@ -99,6 +100,11 @@ func HomePageTopicUrl() string {
 	return homePageTopicUrl
 }
 
+// 首页推荐作者
+func HomePageAuthorUrl() string {
+	return homePageAuthor
+}
+
 func StringGetInt(value string) int {
 	tempInt := strings.SplitAfter(value, " ")
 	return StringToInt(tempInt[1])
@@ -111,7 +117,7 @@ func StringHandle(value string) (string, string) {
 	return newList[0], newList[len(newList)-1]
 }
 
-func StringCommont(value string) string {
+func StringCommon(value string) string {
 	newStringFirst := strings.Replace(value, "\n", "", -1)
 	newString := strings.Replace(newStringFirst, " ", "", -1)
 	return StringSpace(newString)

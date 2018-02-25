@@ -95,4 +95,7 @@ func main() {
 	fmt.Println(newTopic.GetTopicCollectionCity())
 	fmt.Println(newTopic.GetTopicCollectionSchoolyard())
 
+	newAuthor := jianshu.NewRecommendAuthor(7)
+	fmt.Println(newAuthor.GetListRecommendAuthor())
+
 }

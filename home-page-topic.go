@@ -5,9 +5,9 @@ import (
 )
 
 type Topic struct {
-	url    string            `json:"url"`
-	number int               `json:"number"`
-	doc    *goquery.Document `json:"doc"`
+	url    string
+	number int
+	doc    *goquery.Document
 }
 
 func NewTopic(number int) *Topic {
@@ -66,7 +66,7 @@ func (topic *Topic) getDocSelection(url string) []TopicCollection {
 	doc.Find("div.col-xs-8").Each(func(i int, selection *goquery.Selection) {
 		if i < topic.number {
 			name := selection.Find("div.collection-wrap a h4.name").Text()
-			collectionDescription := StringCommont(selection.Find("div.collection-wrap a p.collection-description").Text())
+			collectionDescription := StringCommon(selection.Find("div.collection-wrap a p.collection-description").Text())
 			passageAndFollower := StringSpace(selection.Find("div.count").Text())
 			//fmt.Println(name, collectionDescription, passageAndFollower)
 			one := TopicCollection{

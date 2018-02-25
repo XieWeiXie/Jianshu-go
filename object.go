@@ -1,51 +1,60 @@
 package jianshu
 
 type PassageDetail struct {
-	time     string `json:"time"`
-	title    string `json:"title"`
-	abstract string `json:"abstract"`
-	reader   int    `json:"reader"`
-	comment  int    `json:"comment"`
-	liked    int    `json:"liked"`
-	payed    int    `json:"payed"`
-	author   string `json:"author"`
+	time     string
+	title    string
+	abstract string
+	reader   int
+	comment  int
+	liked    int
+	payed    int
+	author   string
 }
 
 type Topics struct {
-	name string `json:"name"`
+	name string
 }
 
 type SpecialTopics struct {
-	name                string `json:"name"`
-	url                 string `json:"url"`
-	creator             string `json:"creator"`
-	totalPassage        string `json:"total_passage"`
-	totalFollowerNumber string `json:"total_follower_number"`
+	name                string
+	url                 string
+	creator             string
+	totalPassage        string
+	totalFollowerNumber string
 }
 
 type LikeNotes struct {
-	author    string `json:"author"`
-	authorUrl string `json:"authorHomePage"`
-	title     string `json:"title"`
-	abstract  string `json:"abstract"`
+	author    string
+	authorUrl string
+	title     string
+	abstract  string
 }
 
 // 分三类: 评论、喜欢、关注
 type LatestActive struct {
-	activeType   string `json:"type"`
-	activeDetail string `json:"detail"`
+	activeType   string
+	activeDetail string
 }
 
 // 最新评论的文章
 type LatestCommented struct {
-	title    string `json:"title"`
-	abstract string `json:"abstract"`
-	url      string `json:"url"`
+	title    string
+	abstract string
+	url      string
 }
 
 // 首页的热门文集
 type TopicCollection struct {
-	name                  string `json:"name"`
-	collectionDescription string `json:"description"`
-	passageAndFollower    string `json:"detail"`
+	name                  string
+	collectionDescription string
+	passageAndFollower    string
+}
+
+// 首页的推荐作者
+type Author struct {
+	name        string
+	url         string
+	gender      string
+	description string
+	newDetail   string
 }
