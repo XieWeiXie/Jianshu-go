@@ -98,4 +98,7 @@ func main() {
 	newAuthor := jianshu.NewRecommendAuthor(7)
 	fmt.Println(newAuthor.GetListRecommendAuthor())
 
+	newHomePage := jianshu.NewHomePage(2, 1)
+	fmt.Println(newHomePage)
+
 }
