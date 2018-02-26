@@ -26,5 +26,7 @@
 
 TODO
 
--[ ] PhantomJs
--[ ] Search
+- [ ] PhantomJs
+- [ ] Search
+- [ ] Learn JavaScript
+
