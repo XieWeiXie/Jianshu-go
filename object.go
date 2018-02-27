@@ -58,3 +58,17 @@ type Author struct {
 	description string
 	newDetail   string
 }
+
+// 首页热门文章
+type HotPassage struct {
+	author         string
+	time           string
+	collectionName string
+	reader         string
+	comment        string
+	liked          string
+	payed          string
+	title          string
+	url            string
+	abstract       string
+}
