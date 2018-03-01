@@ -31,4 +31,6 @@ TODO
 - [ ] PhantomJs
 - [ ] Search
 - [ ] Learn JavaScript
+- [ ] 增加命令方式：cli
+- [ ] 增加 web 方式：beego
 
