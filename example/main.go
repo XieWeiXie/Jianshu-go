@@ -100,5 +100,13 @@ func main() {
 
 	newHomePage := jianshu.NewHomePage(2, 1)
 	fmt.Println(newHomePage.GetHomePagePassages())
+	fmt.Println("新上榜")
+	newHomePage.GetNewList()
+	fmt.Println("七日热门")
+	newHomePage.GetHotSeven()
+	fmt.Println("30日热门")
+	newHomePage.GetHotMonth()
+	fmt.Println("简书大学堂")
+	newHomePage.GetJianShuSchool()
 
 }

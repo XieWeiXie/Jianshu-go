@@ -3,6 +3,8 @@ package jianshu
 import (
 	"strings"
 
+	"fmt"
+
 	"github.com/PuerkitoBio/goquery"
 )
 
@@ -77,10 +79,78 @@ func (h *HomePage) GetHomePagePassages() []HotPassage {
 	return allHotPassageCollections
 }
 
-func (h *HomePage) GetNewList() {}
+func (h *HomePage) GetNewList() {
+	h.getResponse(0)
 
-func (h *HomePage) GetHotSeven() {}
+}
 
-func (h *HomePage) GetHotMonth() {}
+func (h *HomePage) GetHotSeven() {
+	h.getResponse(1)
+}
 
-func (h *HomePage) GetJianShuSchool() {}
+func (h *HomePage) GetHotMonth() {
+	h.getResponse(2)
+
+}
+
+func (h *HomePage) GetJianShuSchool() {
+	h.getResponse(4)
+}
+
+func (h *HomePage) getURL(index int) string {
+	var url string
+	if index > 5 {
+		return "None"
+	}
+	doc := h.doc()
+	size := doc.Find("div.board").Find("a").Size()
+	if size >= 4 {
+		tempUrl, _ := doc.Find("div.board").Find("a").Eq(index).Attr("href")
+		url = MakeCompleteUrl(tempUrl)
+	}
+	return url
+
+}
+
+func (h *HomePage) getResponse(index int) []PassageDetail {
+	/*
+		    time     string
+			title    string
+			abstract string
+			reader   int
+			comment  int
+			liked    int
+			payed    int
+			author   string
+	*/
+	var allPassageDetail []PassageDetail
+	url := h.getURL(index)
+	doc, _ := goquery.NewDocument(url)
+	doc.Find("div#list-container ul.note-list li").Each(func(i int, selection *goquery.Selection) {
+		var reader, comment, liked, payed string
+		author := StringSpace(selection.Find("div.content div.author div.info a.nickname").Text())
+		time := StringSpace(selection.Find("div.content div.author div.info span.time").Text())
+		title := StringSpace(selection.Find("div.content div.author a.title").Text())
+		abstract := StringCommon(selection.Find("div.content p.abstract").Text())
+		if selection.Find("div.content div.meta a").Size() == 3 {
+			reader = StringCommon(selection.Find("div.content div.meta a").Eq(1).Text())
+			comment = StringCommon(selection.Find("div.content div.meta a").Eq(2).Text())
+		} else if selection.Find("div.content div.meta a").Size() == 2 {
+			reader = StringCommon(selection.Find("div.content div.meta a").Eq(0).Text())
+			comment = StringCommon(selection.Find("div.content div.meta a").Eq(1).Text())
+		} else {
+			reader = StringCommon(selection.Find("div.content div.meta a").Eq(0).Text())
+			comment = "0"
+		}
+		if selection.Find("div.content div.meta span").Size() == 2 {
+			liked = StringCommon(selection.Find("div.content div.meta span").Eq(0).Text())
+			payed = StringCommon(selection.Find("div.content div.meta span").Eq(1).Text())
+		} else {
+			liked = StringCommon(selection.Find("div.content div.meta span").Eq(0).Text())
+			payed = "0"
+		}
+
+		fmt.Println(author, time, title, abstract, reader, comment, liked, payed)
+	})
+	return allPassageDetail
+}
