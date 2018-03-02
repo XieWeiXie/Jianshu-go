@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"jianshu-go"
 )
 
@@ -109,21 +108,23 @@ func main() {
 	//fmt.Println("简书大学堂")
 	//newHomePage.GetJianShuSchool()
 
-	newPublication := jianshu.NewPublication()
-	// 已出版图书
-	fmt.Println("已出版图书")
-	newPublication.GetPublicizedBook()
-	// 小说
-	fmt.Println("小说")
-	newPublication.GetNovelBooks()
-	// IT
-	fmt.Println("IT")
-	newPublication.GetITAndJobMarket()
-	// culture
-	fmt.Println("culture")
-	newPublication.GetCultureAndHistory()
-	// magazine
-	fmt.Println("magazine")
-	newPublication.GetMonthlyMagazine()
+	//newPublication := jianshu.NewPublication()
+	//// 已出版图书
+	//fmt.Println("已出版图书")
+	//newPublication.GetPublicizedBook()
+	//// 小说
+	//fmt.Println("小说")
+	//newPublication.GetNovelBooks()
+	//// IT
+	//fmt.Println("IT")
+	//newPublication.GetITAndJobMarket()
+	//// culture
+	//fmt.Println("culture")
+	//newPublication.GetCultureAndHistory()
+	//// magazine
+	//fmt.Println("magazine")
+	//newPublication.GetMonthlyMagazine()
+	newSearch := jianshu.NewSearch("谢小路")
+	newSearch.GetAuthor(2)
 
 }

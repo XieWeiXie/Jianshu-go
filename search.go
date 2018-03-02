@@ -14,6 +14,8 @@ func (s *HomePageSearch) GetAuthor(number int) {
 	// number < 3
 }
 
+func (s *HomePageSearch) GetCollection(number int) {}
+
 func (s *HomePageSearch) GetPassage(number int) {
 	// number < 9
 }
