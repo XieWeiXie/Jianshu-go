@@ -72,3 +72,13 @@ type HotPassage struct {
 	url            string
 	abstract       string
 }
+
+// 出版书籍
+
+type Book struct {
+	author   string
+	title    string
+	abstract string
+	price    string
+	url      string
+}
