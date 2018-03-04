@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"jianshu-go"
 )
 
@@ -124,7 +125,13 @@ func main() {
 	//// magazine
 	//fmt.Println("magazine")
 	//newPublication.GetMonthlyMagazine()
-	newSearch := jianshu.NewSearch("谢小路")
-	newSearch.GetAuthor(2)
+	//newSearch := jianshu.NewSearch("谢小路")
+	//newSearch.GetAuthor(2)
+
+	newArticle := jianshu.NewArticle("https://www.jianshu.com/p/a043b5008190")
+	fmt.Println(newArticle.GetAuthor())
+	fmt.Println(newArticle.GetTitle())
+	fmt.Println(newArticle.GetDescription())
+	fmt.Println(newArticle.GetContent())
 
 }

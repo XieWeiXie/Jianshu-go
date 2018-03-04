@@ -1,7 +1,6 @@
 package jianshu
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 )
@@ -35,10 +34,6 @@ func StringToInt(element string) int {
 
 func Pages(allPassage int) int {
 	return allPassage/9 + 1
-}
-
-func MakeCompletePages(page int, user *User) string {
-	return fmt.Sprintf(user.Link+"?order_by=shared_at&page=%s", strconv.Itoa(page))
 }
 
 func StringSpace(element string) string {
@@ -92,12 +87,6 @@ func HotPassageUrl(user *User) string {
 		panic("id should not be nil.")
 	}
 	return user.Link + "?order_by=top&_pjax=%23list-container"
-}
-
-// 首页热门推荐专题
-// 废弃
-func HomePageTopicUrl() string {
-	return homePageTopicUrl
 }
 
 // 首页推荐作者

@@ -1,5 +1,11 @@
 package jianshu
 
+import (
+	"strings"
+
+	"github.com/PuerkitoBio/goquery"
+)
+
 type Article struct {
 	url string
 }
@@ -13,12 +19,37 @@ func NewArticle(url string) *Article {
 	}
 }
 
-func (a *Article) GetAuthor() {}
+func (a *Article) doc() *goquery.Document {
+	doc, _ := goquery.NewDocument(a.url)
+	return doc
+}
 
-func (a *Article) GetDescription() {}
+// 获取作者
+func (a *Article) GetAuthor() string {
+	doc := a.doc()
+	return StringCommon(doc.Find("div.article div.author div.info span.name").Text())
+}
 
-func (a *Article) GetTitle() {}
+// 获取作者简介
+func (a *Article) GetDescription() string {
+	doc := a.doc()
+	tempURL, _ := doc.Find("div.article div.author div.info span a").Attr("href")
+	url := MakeCompleteUrl(tempURL)
+	descriptionDoc, _ := goquery.NewDocument(url)
+	tempDescription := StringSpace(descriptionDoc.Find("div.description div.js-intro").Text())
+	return tempDescription
+}
 
-func (a *Article) GetContent() {}
+// 获取文章标题
+func (a *Article) GetTitle() string {
+	doc := a.doc()
+	return doc.Find("div.article h1").Text()
 
-func (a *Article) GetInfo() {}
+}
+
+// 获取文章内容
+func (a *Article) GetContent() string {
+	doc := a.doc()
+	return strings.TrimSpace(doc.Find("div.article div.show-content").Text())
+
+}
