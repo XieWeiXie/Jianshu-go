@@ -1,15 +1,16 @@
 package jianshu
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 )
 
 const (
-	rootUrl          = "https://www.jianshu.com/"
-	rootUrlOnce      = "https://www.jianshu.com"
-	homePageTopicUrl = "https://www.jianshu.com/recommendations/users?utm_source=desktop&utm_medium=index-users"
-	homePageAuthor   = "https://www.jianshu.com/recommendations/users?utm_source=desktop&utm_medium=index-users"
+	rootUrl        = "https://www.jianshu.com/"
+	rootUrlOnce    = "https://www.jianshu.com"
+	trendingSearch = "https://www.jianshu.com/trending_search"
+	homePageAuthor = "https://www.jianshu.com/recommendations/users?utm_source=desktop&utm_medium=index-users"
 )
 
 func MakeCompleteUrl(element string) string {
@@ -87,6 +88,14 @@ func HotPassageUrl(user *User) string {
 		panic("id should not be nil.")
 	}
 	return user.Link + "?order_by=top&_pjax=%23list-container"
+}
+
+func SearchQuery(query string, page int) string {
+	return rootUrl + fmt.Sprintf("/search?q=%s&page=%s&type=note", query, page)
+}
+
+func GetTrendSearch() string {
+	return trendingSearch
 }
 
 // 首页推荐作者

@@ -10,6 +10,8 @@ func NewSearch(query string) *HomePageSearch {
 	}
 }
 
+func (s *HomePageSearch) doc() {}
+
 func (s *HomePageSearch) GetAuthor(number int) {
 	// number < 3
 }

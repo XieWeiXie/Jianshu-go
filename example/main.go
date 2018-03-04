@@ -134,4 +134,7 @@ func main() {
 	fmt.Println(newArticle.GetDescription())
 	fmt.Println(newArticle.GetContent())
 
+	newTrendSearch := jianshu.NewTrendSearch()
+	newTrendSearch.GetTrendSearchList()
+
 }
