@@ -24,7 +24,7 @@ func NewUser(link string, gender string, userID string) *User {
 	}
 }
 
-func (user *User) Doc() *goquery.Document {
+func (user *User) doc() *goquery.Document {
 	if user.Link == "" {
 		panic("The link should not be nil.")
 	}
@@ -36,7 +36,7 @@ func (user *User) GetUserID() string {
 	if user.userID != "" {
 		return user.userID
 	}
-	doc := user.Doc()
+	doc := user.doc()
 	name := doc.Find("div.title").Find("a.name").Text()
 	user.userID = name
 	return name
@@ -46,7 +46,7 @@ func (user *User) GetUserLink() string {
 	if user.Link != "" {
 		return user.Link
 	}
-	doc := user.Doc()
+	doc := user.doc()
 	tempLink, _ := doc.Find("div.title").Find("a.name").Attr("href")
 	link := MakeCompleteUrl(tempLink)
 	return link
@@ -56,7 +56,7 @@ func (user *User) GetUserGender() string {
 	if user.gender != "" {
 		return user.gender
 	}
-	doc := user.Doc()
+	doc := user.doc()
 	tempGender, err := doc.Find("div.title").Find("i").Attr("class")
 	if !err {
 		return "None"
@@ -67,32 +67,32 @@ func (user *User) GetUserGender() string {
 }
 
 func (user *User) GetFollowNumber() int {
-	doc := user.Doc()
+	doc := user.doc()
 	tempFollowNumber := doc.Find("div.info ul li").Eq(0).Find("div a p").Text()
 	return StringToInt(tempFollowNumber)
 }
 
 func (user *User) GetFollowerNumber() int {
-	doc := user.Doc()
+	doc := user.doc()
 	tempFollowerNumber := doc.Find("div.info ul li").Eq(1).Find("div a p").Text()
 	return StringToInt(tempFollowerNumber)
 }
 
 func (user *User) GetPassageNumber() int {
-	doc := user.Doc()
+	doc := user.doc()
 	tempPassageNumber := doc.Find("div.info ul li").Eq(2).Find("div a p").Text()
 	user.Pages = Pages(StringToInt(tempPassageNumber))
 	return StringToInt(tempPassageNumber)
 }
 
 func (user *User) GetWriteNumber() int {
-	doc := user.Doc()
+	doc := user.doc()
 	tempWriteNumber := doc.Find("div.info ul li").Eq(3).Find("div p").Text()
 	return StringToInt(tempWriteNumber)
 }
 
 func (user *User) GetLikeNumber() int {
-	doc := user.Doc()
+	doc := user.doc()
 	tempLikeNumber := doc.Find("div.info ul li").Eq(4).Find("div p").Text()
 	return StringToInt(tempLikeNumber)
 }
@@ -100,7 +100,7 @@ func (user *User) GetLikeNumber() int {
 // 获取个人主页文章集合：最多9篇
 func (user *User) GetHomepagePassage() []PassageDetail {
 	var allPassage []PassageDetail
-	doc := user.Doc()
+	doc := user.doc()
 	if user.GetWriteNumber() == 0 {
 		return nil
 	}
@@ -136,14 +136,14 @@ func (user *User) GetHomepagePassage() []PassageDetail {
 }
 
 func (user *User) GetPersonalDetail() string {
-	doc := user.Doc()
+	doc := user.doc()
 	tempDescription := StringSpace(doc.Find("div.description div.js-intro").Text())
 	return tempDescription
 }
 
 func (user *User) GetTwitterInfo() string {
 	var twitter string
-	doc := user.Doc()
+	doc := user.doc()
 	tempInfoSize := doc.Find("div.description a").Size()
 	if tempInfoSize == 0 {
 		return "None"
