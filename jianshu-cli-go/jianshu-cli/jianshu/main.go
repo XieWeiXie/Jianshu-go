@@ -4,29 +4,83 @@ import (
 	"os"
 
 	"fmt"
-
 	"jianshu-go/jianshu-cli-go/jianshu-cli/bintray"
+
+	"jianshu-go/jianshu-cli-go/jianshu-cli/utils"
 
 	"github.com/urfave/cli"
 )
 
-const commandHelpTemplate = ""
+const commandHelpTemplate = `
+{{.HelpName}}{{if .UsageText}}
+Arguments:
+{{.UsageText}}
+{{end}}{{if .Flags}}
+Options:
+	{{range .Flags}}{{.}}
+	{{end}}{{end}}{{if .ArgsUsage}}
+Environment Variables:
+{{.ArgsUsage}}{{end}}`
 
-const appHelpTemplate = ""
+const appHelpTemplate = `
+NAME:
+   {{.Name}} - {{.Usage}}
 
-const subCommandHelpTemplate = ""
+USAGE:
+   {{if .UsageText}}{{.UsageText}}{{else}}{{.HelpName}} {{if .Flags}}[global options]{{end}}{{if .Commands}} command [command options]{{end}} [arguments...]{{end}}
+   {{if .Version}}
+VERSION:
+   {{.Version}}
+   {{end}}{{if len .Authors}}
+AUTHOR(S):
+   {{range .Authors}}{{ . }}{{end}}
+   {{end}}{{if .Commands}}
+COMMANDS:
+   {{range .Commands}}{{join .Names ", "}}{{ "\t" }}{{.Usage}}
+   {{end}}{{end}}{{if .Flags}}
+GLOBAL OPTIONS:
+   {{range .Flags}}{{.}}
+   {{end}}`
+
+const subCommandHelpTemplate = `
+NAME:
+   {{.HelpName}} - {{.Usage}}
+
+USAGE:
+   {{.HelpName}} command{{if .Flags}} [command options]{{end}}[arguments...]
+
+COMMANDS:
+   {{range .Commands}}{{join .Names ", "}}{{ "\t" }}{{.Usage}}
+   {{end}}{{if .Flags}}
+OPTIONS:
+   {{range .Flags}}{{.}}
+   {{end}}`
+
+var author cli.Author
+
+func init() {
+	author = cli.Author{
+		Name:  "xieWei",
+		Email: "wuxiaoxiaoshen@shu.edu.cn",
+	}
+}
 
 func main() {
 	app := cli.NewApp()
-	app.Name = "JianShu"
-	app.CommandNotFound = func(ctx *cli.Context, command string) {
-		fmt.Printf("Command not found: %v\n", command)
-	}
+	app.Name = utils.AppName
+	app.Usage = utils.AppUsage
+	app.Version = utils.AppVersion
+	app.Authors = []cli.Author{author}
+	app.CommandNotFound = getCommandNotFound
 	app.Commands = getCommands()
-	cli.CommandHelpTemplate = commandHelpTemplate
-	cli.AppHelpTemplate = appHelpTemplate
-	cli.SubcommandHelpTemplate = subCommandHelpTemplate
+	//cli.CommandHelpTemplate = commandHelpTemplate
+	//cli.AppHelpTemplate = appHelpTemplate
+	//cli.SubcommandHelpTemplate = subCommandHelpTemplate
+	app.Action = func(c *cli.Context) {
+		fmt.Println(app.Version)
+	}
 	app.Run(os.Args)
+
 }
 
 func getCommands() []cli.Command {
@@ -36,4 +90,9 @@ func getCommands() []cli.Command {
 			Subcommands: bintray.GetCommands(),
 		},
 	}
+}
+
+func getCommandNotFound(cli *cli.Context, command string) {
+	fmt.Printf("[WARNING] command [ %s ]not found in %s .\n", command, utils.AppName)
+	fmt.Printf("[MESSAGE] please type : %s --help .\n", utils.AppName)
 }
