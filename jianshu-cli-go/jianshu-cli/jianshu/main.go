@@ -84,15 +84,10 @@ func main() {
 }
 
 func getCommands() []cli.Command {
-	return []cli.Command{
-		{
-			Name:        "bin",
-			Subcommands: bintray.GetCommands(),
-		},
-	}
+	return bintray.GetCommands()
 }
 
 func getCommandNotFound(cli *cli.Context, command string) {
-	fmt.Printf("[WARNING] command [ %s ]not found in %s .\n", command, utils.AppName)
-	fmt.Printf("[MESSAGE] please type : %s --help .\n", utils.AppName)
+	fmt.Printf("[WARNING] Command [ %s ] Not Found in %s .\n", command, utils.AppName)
+	fmt.Printf("[MESSAGE] Please Type : %s --help .\n", utils.AppName)
 }

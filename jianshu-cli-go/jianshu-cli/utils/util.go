@@ -1,6 +1,9 @@
 package utils
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 const (
 	AppName    = "JianShu"
@@ -123,4 +126,10 @@ func GetHelp(key string) string {
 		result = userHelp
 	}
 	return result
+}
+
+func HelpExample() string {
+	fmt.Println("谢小路：jianshu-link: https://www.jianshu.com/u/58f0817209aa")
+	var link = "https://www.jianshu.com/u/58f0817209aa"
+	return fmt.Sprintf("Jianshu user --link=%s "+"method 1", link)
 }

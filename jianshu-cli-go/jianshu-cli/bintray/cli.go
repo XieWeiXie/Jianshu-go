@@ -52,6 +52,8 @@ func GetCommands() []cli.Command {
 		},
 		{
 			Name:        "publication",
+			Usage:       utils.GetUsage("publication"),
+			UsageText:   utils.GetUsageText("publication"),
 			Flags:       commands.GetPublicationFlag(),
 			Subcommands: commands.SubCMDPublication(),
 		},
