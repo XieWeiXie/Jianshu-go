@@ -161,28 +161,28 @@ func (user *User) GetTwitterInfo() string {
 	return twitter
 }
 
-// 废弃
-func (user *User) GetWeChatInfo() string {
-	return ""
-}
-
-// 暂时无法解析url
-func (user *User) GetTopics() []*Topics {
-	var allTopics []*Topics
-	return allTopics
-}
-
-// 暂时无法解析url
-func (user *User) GetManagement() []*Topics {
-	var allManagement []*Topics
-	return allManagement
-}
-
-// 暂时无法解析url
-func (user *User) GetPassageTopics() []*Topics {
-	var allPassageTopics []*Topics
-	return allPassageTopics
-}
+//// 废弃
+//func (user *User) GetWeChatInfo() string {
+//	return ""
+//}
+//
+//// 暂时无法解析url
+//func (user *User) GetTopics() []*Topics {
+//	var allTopics []*Topics
+//	return allTopics
+//}
+//
+//// 暂时无法解析url
+//func (user *User) GetManagement() []*Topics {
+//	var allManagement []*Topics
+//	return allManagement
+//}
+//
+//// 暂时无法解析url
+//func (user *User) GetPassageTopics() []*Topics {
+//	var allPassageTopics []*Topics
+//	return allPassageTopics
+//}
 
 func (user *User) GetLikedNotes() []LikeNotes {
 	var allLikedPassages []LikeNotes
