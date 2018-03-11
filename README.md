@@ -122,7 +122,9 @@
 如果项目对你有帮助，欢迎打赏，鼓励作者出更好的开源项目。
 
 
+![支付宝](https://github.com/wuxiaoxiaoshen/Jianshu-go/blob/master/image/%E6%94%AF%E4%BB%98%E5%AE%9D.jpg?raw=true)
 
+![微信](https://github.com/wuxiaoxiaoshen/Jianshu-go/blob/master/image/%E5%BE%AE%E4%BF%A1.jpg?raw=true)
 
 
 ---
