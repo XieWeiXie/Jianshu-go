@@ -1,7 +1,10 @@
 # Jianshu-go
 
+![](https://img.shields.io/badge/jianshu-v1.0.0-519dd9.svg)
 
 本项目尝试解析简书API。
+
+
 
 - 编程语言：golang
 
@@ -16,6 +19,72 @@
 
 
 主要包括上面 6 类：
+
+
+- 支持命令行式
+
+```$xslt
+NAME:
+   JianShu - An Application of JianShu API.
+
+USAGE:
+   jianshu.exe [global options] command [command options] [arguments...]
+
+VERSION:
+
+
+    ___       ___       ___       ___       ___       ___       ___
+   /\  \     /\  \     /\  \     /\__\     /\  \     /\__\     /\__\
+  _\:\  \   _\:\  \   /::\  \   /:| _|_   /::\  \   /:/__/_   /:/ _/_
+ /\/::\__\ /\/::\__\ /::\:\__\ /::|/\__\ /\:\:\__\ /::\/\__\ /:/_/\__\
+ \::/\/__/ \::/\/__/ \/\::/  / \/|::/  / \:\:\/__/ \/\::/  / \:\/:/  /
+  \/__/     \:\__\     /:/  /    |:/  /   \::/  /    /:/  /   \::/  /
+             \/__/     \/__/     \/__/     \/__/     \/__/     \/__/  v1.0.0
+
+
+
+
+AUTHOR:
+   xieWei <wuxiaoxiaoshen@shu.edu.cn>
+
+COMMANDS:
+     article      get jianshu article by cli
+     home-page    get jianshu home page passage by cli
+     recommend    get home page recommend by cli
+     topic        get home page topic
+     user         get user by cli
+     publication  get publication by cli
+     help, h      Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+   --help, -h     show help
+   --version, -v  print the version
+
+
+```
+
+
+```$xslt
+
+>> jianshu.exe user method --url=https://www.jianshu.com/u/58f0817209aa get-user-id
+>> 谢小路
+
+>> jianshu.exe user method --url=https://www.jianshu.com/u/58f0817209aa get-user-gender
+>> None
+
+>> jianshu.exe user method --url=https://www.jianshu.com/u/58f0817209aa get-user-link
+>> https://www.jianshu.com/u/58f0817209aa
+
+>> jianshu.exe user method --url=https://www.jianshu.com/u/58f0817209aa get-follow-number
+>> 9
+
+
+
+...
+
+
+```
+
 
 
 ## User 

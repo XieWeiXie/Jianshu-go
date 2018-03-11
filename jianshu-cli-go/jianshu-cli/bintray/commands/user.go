@@ -19,8 +19,8 @@ var newUser *jianshu.User
 func getFlag() []cli.Flag {
 	return []cli.Flag{
 		cli.StringFlag{
-			Name:  "link",
-			Usage: "jianshu personal link",
+			Name:  "url",
+			Usage: "jianshu personal url",
 		},
 	}
 }
@@ -30,7 +30,7 @@ func actionUserMethod(cli *cli.Context) {
 		return
 	}
 	if cli.NArg() == 1 {
-		startUser(cli.String("link"), cli.Args()[0])
+		startUser(cli.String("url"), cli.Args()[0])
 	}
 }
 
