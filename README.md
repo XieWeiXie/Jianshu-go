@@ -21,9 +21,10 @@
 - Home-page-recommend: 简书推荐作者的信息
 - Home-page-topic: 简书推荐的专题信息
 - Publication： 简书出版信息
+- Special-subject: 专题信息
 
 
-主要包括上面 6 类：
+主要包括上面 7 类：
 
 
 - 支持命令行式
@@ -188,6 +189,17 @@ GLOBAL OPTIONS:
 ![publication-five.png](https://upload-images.jianshu.io/upload_images/1818135-cbc20eea744e722c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
+## Special-subject
+
+- GetSpecialSubjectTitle 获取专题名称
+- GetSpecialSubjectPassageNumber 获取专题文章数目
+- GetSpecialSubjectFollowerNumber 获取专题关注数目
+- GetSpecialSubjectNotice 获取专题公告
+- GetSpecialSubjectTitleAdministrator 获取专题管理员
+- GetSpecialSubjectNewComment 获取专题最新评论
+- GetSpecialSubjectNewAdd 获取专题最新收入的文章
+- GetSpecialSubjectHot 获取专题热门文章
+
 
 ---
 
@@ -206,11 +218,28 @@ GLOBAL OPTIONS:
 
 ---
 
-TODO
+
+## ChangeLog
+
+
+- v1.0.1 (2018.03.13)
+
+增加简书专题接口
+
+- v1.0.0 (2018.03.12) 
+
+增加简书主要的接口
+
+
+
+
+
+## TODO
 
 - [ ] PhantomJs
-- [ ] Search
-- [ ] Learn JavaScript
+- [ ] 增加搜索接口
 - [x] 增加命令方式：cli
 - [ ] 增加 web 方式：beego
+- [ ] 优化输出格式：json
+- [ ] 提供输出存储格式：Csv, Txt, SQLite, Mysql, Mongodb
 
