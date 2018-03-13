@@ -2,6 +2,7 @@ package jianshu
 
 import (
 	"fmt"
+	"regexp"
 	"strconv"
 	"strings"
 )
@@ -123,4 +124,12 @@ func StringCommon(value string) string {
 func StringSplitWith(value string) (string, string) {
 	newString := strings.Split(value, "，")
 	return newString[0], newString[len(newString)-1]
+}
+
+func RegexpFindSting(value string) (int, int) {
+	reg, _ := regexp.Compile(`\d+`)
+	newList := reg.FindAllString(value, -1)
+	numberOne, _ := strconv.Atoi(newList[0])
+	numberTwo, _ := strconv.Atoi(newList[1])
+	return numberOne, numberTwo
 }
