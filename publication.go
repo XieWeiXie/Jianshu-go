@@ -21,23 +21,23 @@ func (p *Publication) doc() *goquery.Document {
 }
 
 func (p *Publication) GetPublicizedBook() {
-	p.getResponse("paper")
+	fmt.Println(p.getResponse("paper"))
 }
 
 func (p *Publication) GetNovelBooks() {
-	p.getResponse("novel")
+	fmt.Println(p.getResponse("novel"))
 }
 
 func (p *Publication) GetITAndJobMarket() {
-	p.getResponse("it")
+	fmt.Println(p.getResponse("it"))
 }
 
 func (p *Publication) GetCultureAndHistory() {
-	p.getResponse("culture")
+	fmt.Println(p.getResponse("culture"))
 }
 
 func (p *Publication) GetMonthlyMagazine() {
-	p.getResponse("collection_monthly")
+	fmt.Println(p.getResponse("collection_monthly"))
 }
 
 func (p *Publication) getURL() string {
@@ -82,10 +82,9 @@ func (p *Publication) getResponse(keyWord string) []Book {
 				abstract = "None"
 			}
 			one.abstract = abstract
-			fmt.Println(url, abstract, title, author, price)
+			//fmt.Println(url, abstract, title, author, price)
 			allBook = append(allBook, one)
 		}
-
 	})
 	return allBook
 
