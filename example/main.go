@@ -74,4 +74,10 @@ func main() {
 	fmt.Println("获取专题公告: ", specialSubject.GetSpecialSubjectNotice())
 	fmt.Println("获取专题文章数目: ", specialSubject.GetSpecialSubjectPassageNumber())
 	fmt.Println("获取专题文章关注人数: ", specialSubject.GetSpecialSubjectFollowerNumber())
+	fmt.Println("获取专题创建者信息: ")
+	jianshu.JsonPretty(specialSubject.GetSpecialSubjectTitleAdministrator())
+	fmt.Println("获取专题最新评论文章信息: ", specialSubject.GetSpecialSubjectNewComment())
+	fmt.Println("获取专题最新收录文章信息: ", specialSubject.GetSpecialSubjectNewAdd())
+	fmt.Println("获取专题最热门文章信息: ", specialSubject.GetSpecialSubjectHot())
+
 }

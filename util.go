@@ -1,6 +1,7 @@
 package jianshu
 
 import (
+	"encoding/json"
 	"fmt"
 	"regexp"
 	"strconv"
@@ -99,6 +100,10 @@ func GetTrendSearch() string {
 	return trendingSearch
 }
 
+func GetSpecialSubjectURL(id int) string {
+	return fmt.Sprintf("https://www.jianshu.com/collections/%s/side_list", strconv.Itoa(id))
+}
+
 // 首页推荐作者
 func HomePageAuthorUrl() string {
 	return homePageAuthor
@@ -132,4 +137,9 @@ func RegexpFindSting(value string) (int, int) {
 	numberOne, _ := strconv.Atoi(newList[0])
 	numberTwo, _ := strconv.Atoi(newList[1])
 	return numberOne, numberTwo
+}
+
+func JsonPretty(value interface{}) {
+	data, _ := json.MarshalIndent(value, "", " ")
+	fmt.Println(string(data))
 }
