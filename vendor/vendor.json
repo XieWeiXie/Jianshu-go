@@ -15,6 +15,18 @@
 			"revisionTime": "2016-12-24T14:14:13Z"
 		},
 		{
+			"checksumSHA1": "NLWt5+9gvXb4Wn9di1ZSGaSAWfk=",
+			"path": "github.com/tidwall/gjson",
+			"revision": "01f00f129617a6fe98941fb920d6c760241b54d2",
+			"revisionTime": "2018-02-23T15:48:56Z"
+		},
+		{
+			"checksumSHA1": "gEpdu1QrdYgZVliuH3JhGph9TQY=",
+			"path": "github.com/tidwall/match",
+			"revision": "1731857f09b1f38450e2c12409748407822dc6be",
+			"revisionTime": "2017-10-02T07:59:45Z"
+		},
+		{
 			"checksumSHA1": "l8BBWZlYp/n2FAMBvIN53o+uRNw=",
 			"path": "github.com/urfave/cli",
 			"revision": "8e01ec4cd3e2d84ab2fe90d8210528ffbb06d8ff",
