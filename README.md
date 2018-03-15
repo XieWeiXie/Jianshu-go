@@ -13,6 +13,16 @@
 
 - 编程语言：golang
 
+
+## Installation
+
+``` 
+go get github.com/wuxiaoxiaoshen/Jianshu-go
+```
+
+
+
+
 主要的接口包括：
 
 - User: 个人主页信息
