@@ -3,9 +3,9 @@ package commands
 import (
 	"fmt"
 
-	"jianshu-go"
+	"github.com/wuxiaoxiaoshen/jianshu-go"
 
-	"jianshu-go/jianshu-cli-go/jianshu-cli/utils"
+	"github.com/wuxiaoxiaoshen/jianshu-go/jianshu-cli-go/jianshu-cli/utils"
 
 	"github.com/urfave/cli"
 )

@@ -1,7 +1,7 @@
 package commands
 
 import (
-	"jianshu-go"
+	"github.com/wuxiaoxiaoshen/jianshu-go"
 
 	"fmt"
 

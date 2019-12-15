@@ -1,9 +1,9 @@
 package bintray
 
 import (
-	"jianshu-go/jianshu-cli-go/jianshu-cli/bintray/commands"
+	"github.com/wuxiaoxiaoshen/jianshu-go/jianshu-cli-go/jianshu-cli/bintray/commands"
 
-	"jianshu-go/jianshu-cli-go/jianshu-cli/utils"
+	"github.com/wuxiaoxiaoshen/jianshu-go/jianshu-cli-go/jianshu-cli/utils"
 
 	"github.com/urfave/cli"
 )

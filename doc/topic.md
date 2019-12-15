@@ -15,7 +15,7 @@ package main
 
 import (
 	"fmt"
-	"jianshu-go"
+	"github.com/wuxiaoxiaoshen/jianshu-go"
 )
 
 

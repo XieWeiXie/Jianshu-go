@@ -4,9 +4,9 @@ import (
 	"os"
 
 	"fmt"
-	"jianshu-go/jianshu-cli-go/jianshu-cli/bintray"
+	"github.com/wuxiaoxiaoshen/jianshu-go/jianshu-cli-go/jianshu-cli/bintray"
 
-	"jianshu-go/jianshu-cli-go/jianshu-cli/utils"
+	"github.com/wuxiaoxiaoshen/jianshu-go/jianshu-cli-go/jianshu-cli/utils"
 
 	"github.com/urfave/cli"
 )
