@@ -582,22 +582,6 @@ func main(){
 
 ---
 
-捐赠：
-
-如果项目对你有帮助，欢迎打赏，鼓励作者出更好的开源项目。
-
-
-<img src="https://github.com/wuxiaoxiaoshen/Jianshu-go/blob/master/image/%E6%94%AF%E4%BB%98%E5%AE%9D.jpg?raw=true" width = "300" height = "300" alt="支付宝" align=center />
-
----
-
-<img src="https://github.com/wuxiaoxiaoshen/Jianshu-go/blob/master/image/%E5%BE%AE%E4%BF%A1.jpg?raw=true" width = "300" height = "300" alt="微信" align=center />
-
-
-
----
-
-
 ## ChangeLog
 
 - 使用 Go Module (2019.12.15)
