@@ -1,11 +1,12 @@
-package main
+package example
 
 import (
 	"fmt"
 	"github.com/wuxiaoxiaoshen/jianshu-go"
+	"testing"
 )
 
-func main() {
+func TestExample(t *testing.T) {
 
 	//fmt.Println("**** User ****")
 	//user := jianshu.NewUser("https://www.jianshu.com/u/58f0817209aa", "", "")
