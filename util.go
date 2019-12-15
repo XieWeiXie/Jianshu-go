@@ -93,7 +93,7 @@ func HotPassageUrl(user *User) string {
 }
 
 func SearchQuery(query string, page int) string {
-	return rootUrl + fmt.Sprintf("/search?q=%s&page=%s&type=note", query, page)
+	return rootUrl + fmt.Sprintf("/search?q=%s&page=%d&type=note", query, page)
 }
 
 func GetTrendSearch() string {
